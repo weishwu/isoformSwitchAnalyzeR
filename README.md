@@ -11,20 +11,20 @@ rm Mus_musculus.GRCm38.98.mod.gtf.tmp1 Mus_musculus.GRCm38.98.mod.gtf.tmp2
 library('IsoformSwitchAnalyzeR')
 
 ### Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
-data=importIsoformExpression(parentDir = './')
-myDesign=as.data.frame(read.table('smps.txt',header=T))
-colnames(myDesign)=c('sampleID','condition')
-#gtf='/nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf'
-gtf='Mus_musculus.GRCm38.98.mod.gtf'
-transcript.fa='/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/analysis_20200318/alignment_results/04-rsem_star_genome_generate/GRCm38.transcripts.fa'
-aSwitchList=importRdata(
-    isoformCountMatrix   = data$counts,
-    isoformRepExpression = data$abundance,
-    designMatrix         = myDesign,
-    isoformExonAnnoation = gtf,
-    isoformNtFasta       = transcript.fa,
-    showProgress = FALSE
-)
+data=importIsoformExpression(parentDir = './')  
+myDesign=as.data.frame(read.table('smps.txt',header=T))  
+colnames(myDesign)=c('sampleID','condition')  
+#gtf='/nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf'  
+gtf='Mus_musculus.GRCm38.98.mod.gtf'  
+transcript.fa='/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/analysis_20200318/alignment_results/04-rsem_star_genome_generate/GRCm38.transcripts.fa'  
+aSwitchList=importRdata(  
+    isoformCountMatrix   = data$counts,  
+    isoformRepExpression = data$abundance,  
+    designMatrix         = myDesign,  
+    isoformExonAnnoation = gtf,  
+    isoformNtFasta       = transcript.fa,  
+    showProgress = FALSE  
+)  
 
 ### Filtering
 ### default: 
