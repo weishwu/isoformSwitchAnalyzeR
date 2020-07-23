@@ -1,15 +1,15 @@
 # isoformSwitchAnalyzeR
 
 
-# prepare GTF
+### prepare GTF
 awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f1-8 >aa
 awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f9|awk '{print $1,$2,$5,$6}' >bb
 paste aa bb >Mus_musculus.GRCm38.98.mod.gtf
 
-# in R
+### in R
 library('IsoformSwitchAnalyzeR')
 
-# Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
+### Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
 data=importIsoformExpression(parentDir = './')
 myDesign=as.data.frame(read.table('smps.txt',header=T))
 colnames(myDesign)=c('sampleID','condition')
