@@ -8,23 +8,23 @@
     rm Mus_musculus.GRCm38.98.mod.gtf.tmp1 Mus_musculus.GRCm38.98.mod.gtf.tmp2
 
 ### in R
-library('IsoformSwitchAnalyzeR')
+    library('IsoformSwitchAnalyzeR')
 
 ### Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
-data=importIsoformExpression(parentDir = './')  
-myDesign=as.data.frame(read.table('smps.txt',header=T))  
-colnames(myDesign)=c('sampleID','condition')  
-#gtf='/nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf'  
-gtf='Mus_musculus.GRCm38.98.mod.gtf'  
-transcript.fa='/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/analysis_20200318/alignment_results/04-rsem_star_genome_generate/GRCm38.transcripts.fa'  
-aSwitchList=importRdata(  
+    data=importIsoformExpression(parentDir = './')  
+    myDesign=as.data.frame(read.table('smps.txt',header=T))  
+    colnames(myDesign)=c('sampleID','condition')  
+    #gtf='/nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf'  
+    gtf='Mus_musculus.GRCm38.98.mod.gtf'  
+    transcript.fa='/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/analysis_20200318/alignment_results/04-rsem_star_genome_generate/GRCm38.transcripts.fa'  
+    aSwitchList=importRdata(  
     isoformCountMatrix   = data$counts,  
     isoformRepExpression = data$abundance,  
     designMatrix         = myDesign,  
     isoformExonAnnoation = gtf,  
     isoformNtFasta       = transcript.fa,  
     showProgress = FALSE  
-)  
+    )  
 
 ### Filtering
 ### default: 
@@ -43,7 +43,7 @@ aSwitchList=importRdata(
          # dIFcutoff = 0.1,
          # quiet=FALSE
 
-asl_filtered=preFilter(aSwitchList)
+    asl_filtered=preFilter(aSwitchList)
 
 ### Testing for Isoform Switches via DEXSeq
 ### default:
@@ -59,8 +59,8 @@ asl_filtered=preFilter(aSwitchList)
          # showProgress = TRUE,
          # quiet = FALSE
 
-asl_analyzed = isoformSwitchTestDEXSeq(switchAnalyzeRlist = asl_filtered)
-extractSwitchSummary(asl_analyzed)
+    asl_analyzed = isoformSwitchTestDEXSeq(switchAnalyzeRlist = asl_filtered)
+    extractSwitchSummary(asl_analyzed)
 
 ### Extracting Nucleotide and Amino Acid Sequences
 ### default:
@@ -76,8 +76,8 @@ extractSwitchSummary(asl_analyzed)
          # alsoSplitFastaFile = FALSE,
          # removeORFwithStop=TRUE,
 
-asl_extracted = extractSequence(asl_analyzed, pathToOutput = '/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/isoformswitch/rsem')
-save(asl_extracted,file='asl_extracted.RData')
+    asl_extracted = extractSequence(asl_analyzed, pathToOutput = '/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/isoformswitch/rsem')
+    save(asl_extracted,file='asl_extracted.RData')
 
 ### Sequence analysis
 
@@ -96,47 +96,47 @@ save(asl_extracted,file='asl_extracted.RData')
 ##### NetSurfP-2: 1) Go to webserver. 2) Upload the amino acid file (_AA) created with extractSequence() function. 3) Submit your job. 4) Wait till job is finished (if you submit your email you will receive a notification). 5) In the top-right corner of the result site use the “Export All” button to download the results as a CNV file. 6) Supply a string indicating the path to the downloaded csv file directly to the “pathToNetSurfP2resultFile” argument. If you run NetSurfP-2 locally just use the “–csv” argument and provide the resulting csv file to the pathToNetSurfP2resultFile argument.
 
 ### Add CPAT analysis
-asl_data = analyzeCPAT(
+    asl_data = analyzeCPAT(
     switchAnalyzeRlist   = asl_extracted,
     pathToCPATresultFile = "./asl_CPAT.txt",
     codingCutoff         = 0.725, # the coding potential cutoff we suggested for human
     removeNoncodinORFs   = TRUE   # because ORF was predicted de novo
-)
+    )
 
 ### Add PFAM analysis
-asl_data = analyzePFAM(
+    asl_data = analyzePFAM(
     switchAnalyzeRlist   = asl_data,
     pathToPFAMresultFile = "./",
     showProgress=FALSE
-)
+    )
 
 ### Add SignalP analysis
-asl_data = analyzeSignalP(
+    asl_data = analyzeSignalP(
     switchAnalyzeRlist       = asl_data,
     pathToSignalPresultFile  = "./asl_SignalP.txt"
-)
+    )
 #> Added signal peptide information to 17 (10.49%) transcripts
 
 ### Add IUPred2A analysis
-asl_data = analyzeIUPred2A(
+    asl_data = analyzeIUPred2A(
     switchAnalyzeRlist        = asl_data,
     pathToIUPred2AresultFile = "./asl_IUPred2A.result",
     showProgress = FALSE
-)
+    )
 
 
 ### Predicting Alternative Splicing
-asl_data_altspl = analyzeAlternativeSplicing(
+    asl_data_altspl = analyzeAlternativeSplicing(
     switchAnalyzeRlist = asl_data,
     quiet=TRUE
-)
+    )
 
 ### overview of number of intron retentions (IR)
-table( asl_data_altspl$AlternativeSplicingAnalysis$IR )
+    table( asl_data_altspl$AlternativeSplicingAnalysis$IR )
 
 
 ### plot
-ggplot(data=asl_conseq$isoformFeatures, aes(x=dIF, y=-log10(isoform_switch_q_value))) +
+    ggplot(data=asl_conseq$isoformFeatures, aes(x=dIF, y=-log10(isoform_switch_q_value))) +
      geom_point(
        aes( color=abs(dIF) > 0.1 & isoform_switch_q_value < 0.05 ), # default cutoff
         size=1
@@ -149,7 +149,7 @@ ggplot(data=asl_conseq$isoformFeatures, aes(x=dIF, y=-log10(isoform_switch_q_val
     labs(x='dIF', y='-Log10 ( Isoform Switch Q Value )') +
     theme_bw()
 
-switchPlot(
+    switchPlot(
     asl_conseq,
     gene='ENSMUSG00000030741',
     condition1 = 'Ctrl',
@@ -157,27 +157,27 @@ switchPlot(
     localTheme = theme_bw(base_size = 13) # making text sightly larger for vignette
     
 
-extractSplicingEnrichment(
+    extractSplicingEnrichment(
     asl_conseq,
     returnResult = FALSE # if TRUE returns a data.frame with the results
-)
+    )
 
-extractConsequenceEnrichment(
+    extractConsequenceEnrichment(
     asl_conseq,
     consequencesToAnalyze='all',
     analysisOppositeConsequence = TRUE,
     returnResult = FALSE # if TRUE returns a data.frame with the results
-)
+    )
 
-extractConsequenceSummary(
+    extractConsequenceSummary(
     asl_conseq,
     consequencesToAnalyze='all',
     plotGenes = FALSE,           # enables analysis of genes (instead of isoforms)
     asFractionTotal = FALSE      # enables analysis of fraction of significant features
-)
+    )
 
-extractSwitchOverlap(
+    extractSwitchOverlap(
     asl_conseq,
     filterForConsequences=TRUE
-)
+    )
 
