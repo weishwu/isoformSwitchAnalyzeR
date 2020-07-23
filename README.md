@@ -2,9 +2,7 @@
 
 
 ### prepare GTF
-awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f1-8 >aa
-awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f9|awk '{print $1,$2,$5,$6}' >bb
-paste aa bb >Mus_musculus.GRCm38.98.mod.gtf
+paste <`awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f1-8` <`awk '{if ($3!="gene") print $0}' /nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf|grep -v "^#"|cut -f9|awk '{print $1,$2,$5,$6}'` >Mus_musculus.GRCm38.98.mod.gtf
 
 ### in R
 library('IsoformSwitchAnalyzeR')
