@@ -10,7 +10,7 @@
 ### in R
     library('IsoformSwitchAnalyzeR')
 
-### Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
+    # Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
     data=importIsoformExpression(parentDir = './')  
     myDesign=as.data.frame(read.table('smps.txt',header=T))  
     colnames(myDesign)=c('sampleID','condition')  
