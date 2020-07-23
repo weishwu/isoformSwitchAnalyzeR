@@ -134,3 +134,50 @@ asl_data_altspl = analyzeAlternativeSplicing(
 ### overview of number of intron retentions (IR)
 table( asl_data_altspl$AlternativeSplicingAnalysis$IR )
 
+
+### plot
+ggplot(data=asl_conseq$isoformFeatures, aes(x=dIF, y=-log10(isoform_switch_q_value))) +
+     geom_point(
+       aes( color=abs(dIF) > 0.1 & isoform_switch_q_value < 0.05 ), # default cutoff
+        size=1
+    ) +
+    geom_hline(yintercept = -log10(0.05), linetype='dashed') + # default cutoff
+    geom_vline(xintercept = c(-0.1, 0.1), linetype='dashed') + # default cutoff
+    facet_wrap( ~ condition_2) +
+    #facet_grid(condition_1 ~ condition_2) + # alternative to facet_wrap if you have overlapping conditions
+    scale_color_manual('Signficant\nIsoform Switch', values = c('black','red')) +
+    labs(x='dIF', y='-Log10 ( Isoform Switch Q Value )') +
+    theme_bw()
+
+switchPlot(
+    asl_conseq,
+    gene='ENSMUSG00000030741',
+    condition1 = 'Ctrl',
+    condition2 = 'Mfn12.Double.Kr',
+    localTheme = theme_bw(base_size = 13) # making text sightly larger for vignette
+    
+
+extractSplicingEnrichment(
+    asl_conseq,
+    returnResult = FALSE # if TRUE returns a data.frame with the results
+)
+
+extractConsequenceEnrichment(
+    asl_conseq,
+    consequencesToAnalyze='all',
+    analysisOppositeConsequence = TRUE,
+    returnResult = FALSE # if TRUE returns a data.frame with the results
+)
+
+extractConsequenceSummary(
+    asl_conseq,
+    consequencesToAnalyze='all',
+    plotGenes = FALSE,           # enables analysis of genes (instead of isoforms)
+    asFractionTotal = FALSE      # enables analysis of fraction of significant features
+)
+
+extractSwitchOverlap(
+    asl_conseq,
+    filterForConsequences=TRUE
+)
+
