@@ -79,11 +79,18 @@
 ### Sequence analysis
 
 ##### CPAT or CPC2: Coding potential assessment
+
 ##### CPAT : Use default parameters and the nucleotide fasta file (_nt.fasta). If the webserver was used, download the tab-delimited result file (available at the bottom of the result page). If a stand-alone version was used, just supply the path to the result file.
+##### command-line manual: http://rna-cpat.sourceforge.net/#make-hexamer-tab-py
+##### Download pre-built hexamer files from: https://sourceforge.net/projects/rna-cpat/files/v1.2.2/prebuilt_model/
+
 ##### CPC2 : Use default parameters and if required select the most similar species. If the webserver (batch submission) was used, download the tab-delimited result file (via the “Download the result” button). If a stand-alone version was just just supply the path to the result file.
 
 ##### Pfam: Prediction of protein domains
 ##### Use default parameters and the amino acid fasta file (_AA.fasta). If the webserver is used you need to copy/paste the result part of the mail you receive into an empty plain text document (notepad, sublimetext, TextEdit or similar (not Word)) and save that to a plain text (txt) file. The path to that file should be supplied. If a stand-alone version was used, just supply the path to the result file. A more detailed walkthrough is found under details in the documentation of the analyzePFAM() function (?analyzePFAM).
+##### command-line manual: http://avrilomics.blogspot.com/2015/08/pfamscanpl.html
+##### download database files from: ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release
+##### Results are different from the web-server results.
 
 ##### SignalP: Prediction of Signal Peptides — a short N-terminal sequence of a peptide indicating where a protein should be membrane bound or secreted
 ##### Use the amino acid fasta file (_AA.fasta). If using the webserver SignalP should be run with the parameter “Short output (no figures)” under “Output format” and one should select the appropriate “Organism group”. When using a stand-alone version SignalP should be run with the ‘-f summary’ option. If using the webserver the results can be downloaded using the “Downloads” button in the top-right corner where the user should select “Prediction summary” and supply the path to the resulting file to the “pathToSignalPresultFile” argument. If a stand-alone version was just supply the path to the summary result file.
