@@ -77,7 +77,8 @@
     save(asl_extracted,file='asl_extracted.RData')
 
 ### Sequence analysis
-* Docker image containing cpat, pfam, signalp and iupred2a: docker://weishwu/isoform_sequence_analysis:08202020
+* Docker image containing cpat, pfam, signalp and iupred2a: 
+`docker://weishwu/isoform_sequence_analysis:08202020`
 
 #### 1. Coding potential assessment
 
