@@ -96,8 +96,8 @@ cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Mouse_logitModel.RDa
 #### 2. Pfam: Prediction of protein domains
 * Use default parameters and the amino acid fasta file (_AA.fasta). If the webserver is used you need to copy/paste the result part of the mail you receive into an empty plain text document (notepad, sublimetext, TextEdit or similar (not Word)) and save that to a plain text (txt) file. The path to that file should be supplied. If a stand-alone version was used, just supply the path to the result file. A more detailed walkthrough is found under details in the documentation of the analyzePFAM() function (?analyzePFAM).
 * command-line manual: http://avrilomics.blogspot.com/2015/08/pfamscanpl.html
-* download database files from: ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release
-* Results are different from the web-server results.
+* download database files from: [ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release](ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release)
+* Results are different from the web-server results. The results from pfam_scan.pl have fewer lines than from the web-server. The web-server linked from the IsoformSwitchAnalyzeR manual is actuall hmmscan, whereas the manual states that "pfam ... can be run either locally (using the pfam_scan.pl script as described in the readme found here or via their webserver". The difference is explained here: 
 ```
 pfam_scan.pl -fasta isoform_aminoacid.fasta -dir /usr/share/pfam_data -outfile pfam_output.txt
 ```
