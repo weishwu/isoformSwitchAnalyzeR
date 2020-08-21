@@ -98,7 +98,7 @@ cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Mouse_logitModel.RDa
 * command-line manual: http://avrilomics.blogspot.com/2015/08/pfamscanpl.html
 * download HMM files from: ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release
 * The web-server linked from the IsoformSwitchAnalyzeR manual is actuall hmmscan, whereas the manual states that "pfam ... can be run either locally (using the pfam_scan.pl script as described in the readme found here or via their [webserver](http://lilab.research.bcm.edu/cpat/)". The difference is explained here: https://gist.github.com/olgabot/f65365842e27d2487ad3. The actual pfamscan web-server should be: https://www.ebi.ac.uk/Tools/pfa/pfamscan/
-* The results are a little different between command-line version and the web-server. The lines are slightly fewer from the command-line version and the E-values are slightly differet.
+* The results are a little different between command-line version and the web-server. The lines are slightly fewer from the command-line version and the E-values are slightly differet. The web-server uses `-e_seq 10 -e_dom 10` by default but they are not the default parameters in the command-line version (values not shown).
 ```
 pfam_scan.pl -fasta isoform_aminoacid.fasta -dir /usr/share/pfam_data -outfile pfam_output.txt
 ```
