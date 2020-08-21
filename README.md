@@ -78,9 +78,9 @@
 
 ### Sequence analysis
 
-#### Coding potential assessment
+#### 1. Coding potential assessment
 
-#### CPAT
+#### 1.1 CPAT
 ##### Use default parameters and the nucleotide fasta file (_nt.fasta). If the webserver was used, download the tab-delimited result file (available at the bottom of the result page). If a stand-alone version was used, just supply the path to the result file.
 * command-line manual: http://rna-cpat.sourceforge.net/#make-hexamer-tab-py
 * Download pre-built hexamer files from: https://sourceforge.net/projects/rna-cpat/files/v1.2.2/prebuilt_model/
