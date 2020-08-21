@@ -106,7 +106,8 @@ signalp -fasta isoform_aminoacid.fasta -org euk -format short -prefix signalp_ou
 ```
 
 ##### IUPred2A or NetSurfP-2: Prediction of Intrinsically Unstructured Proteins
-###### IUPred2A: 1) Go to the webserver 2) Upload the amino acoid file (_AA) created with extractSequence() function. 3) Add your email (you will recieve a notification when the job is done). 4) In the email use the link indicated by “The text file can be found here:” and save the result (right click on a blank space and use “save as” or use the keybord shortcut “ctrl/cmd + s”). 5) Supply a string indicating the path to the downloaded file to the “pathToIUPred2AresultFile” argument. If multiple files are creted (multiple web-server runs) just supply the path to all of them as a string.
+##### IUPred2A: 
+1) Go to the webserver 2) Upload the amino acoid file (_AA) created with extractSequence() function. 3) Add your email (you will recieve a notification when the job is done). 4) In the email use the link indicated by “The text file can be found here:” and save the result (right click on a blank space and use “save as” or use the keybord shortcut “ctrl/cmd + s”). 5) Supply a string indicating the path to the downloaded file to the “pathToIUPred2AresultFile” argument. If multiple files are creted (multiple web-server runs) just supply the path to all of them as a string.
 * Download command-line version from: https://iupred2a.elte.hu/download_new
 * Manual: https://iupred2a.elte.hu/help_new
 ```
@@ -114,7 +115,8 @@ signalp -fasta isoform_aminoacid.fasta -org euk -format short -prefix signalp_ou
 python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a ENSMUST00000092794_aminoacid.fasta long >iupred_output_ENSMUST00000092794.txt
 ```
 
-##### NetSurfP-2: 1) Go to webserver. 2) Upload the amino acid file (_AA) created with extractSequence() function. 3) Submit your job. 4) Wait till job is finished (if you submit your email you will receive a notification). 5) In the top-right corner of the result site use the “Export All” button to download the results as a CNV file. 6) Supply a string indicating the path to the downloaded csv file directly to the “pathToNetSurfP2resultFile” argument. If you run NetSurfP-2 locally just use the “–csv” argument and provide the resulting csv file to the pathToNetSurfP2resultFile argument.
+##### NetSurfP-2: 
+1) Go to webserver. 2) Upload the amino acid file (_AA) created with extractSequence() function. 3) Submit your job. 4) Wait till job is finished (if you submit your email you will receive a notification). 5) In the top-right corner of the result site use the “Export All” button to download the results as a CNV file. 6) Supply a string indicating the path to the downloaded csv file directly to the “pathToNetSurfP2resultFile” argument. If you run NetSurfP-2 locally just use the “–csv” argument and provide the resulting csv file to the pathToNetSurfP2resultFile argument.
 
 ### Add CPAT analysis
     asl_data = analyzeCPAT(
