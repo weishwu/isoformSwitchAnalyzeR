@@ -26,7 +26,7 @@ The first column is the sample ID and the rest is the conditions.
     showProgress = FALSE  
     )
 
-### High-level function covering filtering, switch test, and nt & aa sequence extraction
+### 5. High-level function covering filtering, switch test, and nt & aa sequence extraction
     # default parameters:
     #     isoformSwitchAnalysisPart1(
     #     switchAnalyzeRlist,
