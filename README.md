@@ -5,8 +5,8 @@ Create a folder for each sample (e.g. Sample_2/). Put Rsem gene-level and isofor
 The first column is the sample ID and the rest is the conditions.
 
 ### 3. Prepare GTF 
-(remove "gene" lines and retain "gene_id" and "transcript_id" fields)
-    python modify_gtf.py /nfs/turbo/umms-brcfpipeline/references/ENSEMBL_genomes/Homo_sapiens/GRCh38/Homo_sapiens.GRCh38.98.gtf Homo_sapiens.GRCh38.98.mod.gtf  
+`# remove "gene" lines and retain "gene_id" and "transcript_id" fields
+python modify_gtf.py /nfs/turbo/umms-brcfpipeline/references/ENSEMBL_genomes/Homo_sapiens/GRCh38/Homo_sapiens.GRCh38.98.gtf Homo_sapiens.GRCh38.98.mod.gtf`  
 
 ### 4. Load data into IsoformSwitchAnalyzeR
     library('IsoformSwitchAnalyzeR')
