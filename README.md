@@ -1,19 +1,17 @@
-# isoformSwitchAnalyzeR
-
-### Prepare Rsem count data
+### 1. Prepare Rsem count data
 Create a folder for each sample (e.g. Sample_2/). Put Rsem gene-level and isoform-level count data (e.g. Sample_2.genes.results and Sample_2.isoforms.results) in the sample folders.
 
-### Prepare a sample table. 
+### 2. Prepare a sample table. 
 The first column is the sample ID and the rest is the conditions.
 
-### prepare GTF 
+### 3. Prepare GTF 
 (remove "gene" lines and retain "gene_id" and "transcript_id" fields)
     python modify_gtf.py /nfs/turbo/umms-brcfpipeline/references/ENSEMBL_genomes/Homo_sapiens/GRCh38/Homo_sapiens.GRCh38.98.gtf Homo_sapiens.GRCh38.98.mod.gtf  
 
-### in R
+### 4. Load data into IsoformSwitchAnalyzeR
 library('IsoformSwitchAnalyzeR')
 
-# Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
+    # Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
     data=importIsoformExpression(parentDir = '/nfs/med-bfx-activeprojects/Love_Simulated_DTU/IsoformSwitchAnalyzeR')  
     myDesign=as.data.frame(read.table('smps.txt',header=T))  
     colnames(myDesign)=c('sampleID','condition')  
