@@ -9,7 +9,7 @@ The first column is the sample ID and the rest is the conditions.
     python modify_gtf.py /nfs/turbo/umms-brcfpipeline/references/ENSEMBL_genomes/Homo_sapiens/GRCh38/Homo_sapiens.GRCh38.98.gtf Homo_sapiens.GRCh38.98.mod.gtf  
 
 ### 4. Load data into IsoformSwitchAnalyzeR
-library('IsoformSwitchAnalyzeR')
+    library('IsoformSwitchAnalyzeR')
 
     # Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
     data=importIsoformExpression(parentDir = '/nfs/med-bfx-activeprojects/Love_Simulated_DTU/IsoformSwitchAnalyzeR')  
