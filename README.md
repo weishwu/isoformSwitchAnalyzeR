@@ -60,7 +60,7 @@ The first column is the sample ID and the rest is the conditions.
          # quiet = FALSE
 
     asl_analyzed = isoformSwitchTestDEXSeq(switchAnalyzeRlist = asl_filtered)
-    save(asl_analyzed, file='asl_analyzed')
+    save(asl_analyzed, file='asl_analyzed.rda')
     extractSwitchSummary(asl_analyzed)
     head(asl_analyzed$isoformFeatures)
     
