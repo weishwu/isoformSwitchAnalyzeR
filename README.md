@@ -60,8 +60,10 @@ The first column is the sample ID and the rest is the conditions.
          # quiet = FALSE
 
     asl_analyzed = isoformSwitchTestDEXSeq(switchAnalyzeRlist = asl_filtered)
+    save(asl_analyzed, file='asl_analyzed')
     extractSwitchSummary(asl_analyzed)
-
+    head(asl_analyzed$isoformFeatures)
+    
 ### Extracting Nucleotide and Amino Acid Sequences
 ### default:
          # switchAnalyzeRlist,
