@@ -26,60 +26,24 @@ The first column is the sample ID and the rest is the conditions.
     showProgress = FALSE  
     )
 
-### Filtering
-### default: 
-         # switchAnalyzeRlist,
-         # geneExpressionCutoff = 1,
-         # isoformExpressionCutoff = 0,
-         # IFcutoff=0.01,
-         # acceptedGeneBiotype = NULL,
-         # acceptedIsoformClassCode = NULL,
-         # removeSingleIsoformGenes = TRUE,
-         # reduceToSwitchingGenes=FALSE,
-         # reduceFurtherToGenesWithConsequencePotential = FALSE,
-         # onlySigIsoforms = FALSE,
-         # keepIsoformInAllConditions=FALSE,
-         # alpha=0.05,
-         # dIFcutoff = 0.1,
-         # quiet=FALSE
-
-    asl_filtered=preFilter(aSwitchList)
-
-### Testing for Isoform Switches via DEXSeq
-### default:
-         # switchAnalyzeRlist,
-         # alpha = 0.05,
-         # dIFcutoff = 0.1,
-         # correctForConfoundingFactors=TRUE,
-         # overwriteIFvalues=TRUE,
-         # reduceToSwitchingGenes = TRUE,
-         # reduceFurtherToGenesWithConsequencePotential = TRUE,
-         # onlySigIsoforms = FALSE,
-         # keepIsoformInAllConditions = TRUE,
-         # showProgress = TRUE,
-         # quiet = FALSE
-
-    asl_analyzed = isoformSwitchTestDEXSeq(switchAnalyzeRlist = asl_filtered)
-    save(asl_analyzed, file='asl_analyzed.rda')
-    extractSwitchSummary(asl_analyzed)
-    head(asl_analyzed$isoformFeatures)
+### High-level function covering filtering, switch test, and nt & aa sequence extraction
+    # default parameters:
+    #     isoformSwitchAnalysisPart1(
+    #     switchAnalyzeRlist,
+    #     alpha = 0.05,
+    #     dIFcutoff = 0.1,
+    #     switchTestMethod='DEXSeq',
+    #     orfMethod = "longest",
+    #     genomeObject = NULL,
+    #     cds = NULL,
+    #     pathToOutput = getwd(),
+    #     outputSequences = TRUE,
+    #     prepareForWebServers = FALSE,
+    #     overwriteORF=FALSE,
+    #     quiet=FALSE)
     
-### Extracting Nucleotide and Amino Acid Sequences
-### default:
-         # switchAnalyzeRlist,
-         # genomeObject  = NULL,
-         # onlySwitchingGenes = TRUE,
-         # alpha = 0.05,
-         # dIFcutoff = 0.1,
-         # extractNTseq = TRUE,
-         # extractAAseq = TRUE,
-         # removeShortAAseq = TRUE,
-         # removeLongAAseq  = FALSE,
-         # alsoSplitFastaFile = FALSE,
-         # removeORFwithStop=TRUE,
-
-    asl_extracted = extractSequence(asl_analyzed, pathToOutput = '/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/isoformswitch/rsem')
-    save(asl_extracted,file='asl_extracted.RData')
+    asl_analyzed=isoformSwitchAnalysisPart1(aSwitchList)
+    save(asl_analyzed,file='asl_analyzed.rda')
 
 ### Sequence analysis
 * Docker image containing cpat, pfam, signalp and iupred2a: 
