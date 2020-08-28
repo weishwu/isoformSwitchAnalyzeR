@@ -1,19 +1,21 @@
 # isoformSwitchAnalyzeR
 
+### Create a folder for each sample (e.g. Sample_2/). Put Rsem gene-level and isoform-level count data (e.g. Sample_2.genes.results and Sample_2.isoforms.results) in the sample folders.
 
-### prepare GTF
+### Prepare a sample table. The first column is the sample ID and the rest is the conditions.
+
+### prepare GTF (remove "gene" lines and retain "gene_id" and "transcript_id" fields)
     python modify_gtf.py /nfs/turbo/umms-brcfpipeline/references/ENSEMBL_genomes/Homo_sapiens/GRCh38/Homo_sapiens.GRCh38.98.gtf Homo_sapiens.GRCh38.98.mod.gtf  
 
 ### in R
-    library('IsoformSwitchAnalyzeR')
+library('IsoformSwitchAnalyzeR')
 
-    # Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
-    data=importIsoformExpression(parentDir = './')  
+# Load RSEM TPM. By default, calculateCountsFromAbundance=T, addIsofomIdAsColumn=T, interLibNormTxPM=T, normalizationMethod=TMM
+    data=importIsoformExpression(parentDir = '/nfs/med-bfx-activeprojects/Love_Simulated_DTU/IsoformSwitchAnalyzeR')  
     myDesign=as.data.frame(read.table('smps.txt',header=T))  
     colnames(myDesign)=c('sampleID','condition')  
-    #gtf='/nfs/med-bfx-common/ENSEMBL_references/Mus_musculus/GRCm38/Mus_musculus.GRCm38.98.gtf'  
-    gtf='Mus_musculus.GRCm38.98.mod.gtf'  
-    transcript.fa='/nfs/med-bfx-activeprojects/Soleimanpour_RS1_weishwu_damki_NovaA-225/analysis_20200318/alignment_results/04-rsem_star_genome_generate/GRCm38.transcripts.fa'  
+    gtf='Homo_sapiens.GRCh38.98.mod.gtf'  
+    transcript.fa='/nfs/med-bfx-activeprojects/trsaari/sandbox/20200717_Love_sim_comps/analysis_test/alignment_results/04-rsem_star_genome_generate/GRCh38.transcripts.fa'  
     aSwitchList=importRdata(  
     isoformCountMatrix   = data$counts,  
     isoformRepExpression = data$abundance,  
@@ -21,7 +23,7 @@
     isoformExonAnnoation = gtf,  
     isoformNtFasta       = transcript.fa,  
     showProgress = FALSE  
-    )  
+    )
 
 ### Filtering
 ### default: 
