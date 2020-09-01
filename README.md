@@ -120,7 +120,7 @@ done
 # combine results into one file, add isoform ID
 for f in iupred2a_output_*.fa.txt
 do
-id=`echo ${f}|cut -d'_' -f3|sed 's/.fa.txt//g'`
+id=`echo ${f}|sed 's/iupred2a_output_//g'|sed 's/.fa.txt//g'`
 sed "s/# POS\t/>${id}\n# POS\t/g" ${f} >>iupred2a_output.txt
 echo -e "\n\n################" >>iupred2a_output.txt
 done
