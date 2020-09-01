@@ -116,6 +116,13 @@ python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a/ ${f} long >iup
 let count+=1
 [[ $((count%Nproc)) -eq 0 ]] && wait
 done
+
+# combine results into one file
+for f in *.txt
+do
+cat ${f} >>ipured2a_output.txt
+echo -e "\n\n################" >>ipured2a_output.txt
+done
 ```
 
 ##### 4.2 NetSurfP-2 
