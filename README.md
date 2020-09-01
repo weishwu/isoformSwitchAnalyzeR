@@ -162,10 +162,7 @@ done
 
 
 ### 8. Predicting Alternative Splicing
-    asl_data_altspl = analyzeAlternativeSplicing(
-    switchAnalyzeRlist = asl_data,
-    quiet=TRUE
-    )
+    asl_data_altspl = analyzeAlternativeSplicing(switchAnalyzeRlist = asl_data, quiet=TRUE)
 
 ### overview of number of intron retentions (IR)
     table( asl_data_altspl$AlternativeSplicingAnalysis$IR )
