@@ -70,7 +70,11 @@ The first column is the sample ID and the rest is the conditions.
 * command-line manual: http://rna-cpat.sourceforge.net/#make-hexamer-tab-py
 * Download pre-built hexamer files from: https://sourceforge.net/projects/rna-cpat/files/v1.2.2/prebuilt_model/
 ```
+# mouse
 cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Mouse_logitModel.RData -x /usr/share/cpat_data/Mouse_Hexamer.tsv -o cpat_output.txt
+
+# human
+cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Human_logitModel.RData -x /usr/share/cpat_data/Human_Hexamer.tsv -o cpat_output.txt
 ```
 
 ##### 1.2 CPC2
