@@ -59,13 +59,13 @@ The first column is the sample ID and the rest is the conditions.
      write.table(asl_analyzed_selected, 'isoforms_DTU.txt', quote=F,sep='\t',row.names=F,col.names=T)
 
 
-### Sequence analysis
+### 6. Sequence analysis
 * Docker image containing cpat, pfam, signalp and iupred2a: 
 `docker://weishwu/isoform_sequence_analysis:08202020`
 
-#### 1. Coding potential assessment
+#### 6.1. Coding potential assessment
 
-##### 1.1 CPAT
+##### 6.1.1 CPAT
 * Use default parameters and the nucleotide fasta file (_nt.fasta). If the webserver was used, download the tab-delimited result file (available at the bottom of the result page). If a stand-alone version was used, just supply the path to the result file.
 * command-line manual: http://rna-cpat.sourceforge.net/#make-hexamer-tab-py
 * Download pre-built hexamer files from: https://sourceforge.net/projects/rna-cpat/files/v1.2.2/prebuilt_model/
@@ -77,10 +77,10 @@ cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Mouse_logitModel.RDa
 cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Human_logitModel.RData -x /usr/share/cpat_data/Human_Hexamer.tsv -o cpat_output.txt
 ```
 
-##### 1.2 CPC2
+##### 6.1.2 CPC2
 * Use default parameters and if required select the most similar species. If the webserver (batch submission) was used, download the tab-delimited result file (via the “Download the result” button). If a stand-alone version was just just supply the path to the result file.
 
-#### 2. Pfam: Prediction of protein domains
+#### 6.2. Pfam: Prediction of protein domains
 * Use default parameters and the amino acid fasta file (_AA.fasta). If the webserver is used you need to copy/paste the result part of the mail you receive into an empty plain text document (notepad, sublimetext, TextEdit or similar (not Word)) and save that to a plain text (txt) file. The path to that file should be supplied. If a stand-alone version was used, just supply the path to the result file. A more detailed walkthrough is found under details in the documentation of the analyzePFAM() function (?analyzePFAM).
 * command-line manual: http://avrilomics.blogspot.com/2015/08/pfamscanpl.html
 * download HMM files from: ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release
@@ -91,15 +91,15 @@ source activate pfam
 pfam_scan.pl -fasta isoform_aminoacid.fasta -dir /usr/share/pfam_data -outfile pfam_output.txt
 ```
 
-#### 3. SignalP: Prediction of Signal Peptides — a short N-terminal sequence of a peptide indicating where a protein should be membrane bound or secreted
+#### 6.3. SignalP: Prediction of Signal Peptides — a short N-terminal sequence of a peptide indicating where a protein should be membrane bound or secreted
 * Use the amino acid fasta file (_AA.fasta). If using the webserver SignalP should be run with the parameter “Short output (no figures)” under “Output format” and one should select the appropriate “Organism group”. When using a stand-alone version SignalP should be run with the ‘-f summary’ option. If using the webserver the results can be downloaded using the “Downloads” button in the top-right corner where the user should select “Prediction summary” and supply the path to the resulting file to the “pathToSignalPresultFile” argument. If a stand-alone version was just supply the path to the summary result file.
 * Download command-line version from: http://www.cbs.dtu.dk/services/SignalP/portable.php
 ```
 signalp -fasta isoform_aminoacid.fasta -org euk -format short -prefix signalp_output
 ```
 
-#### 4. Prediction of Intrinsically Unstructured Proteins
-##### 4.1 IUPred2A 
+#### 6.4. Prediction of Intrinsically Unstructured Proteins
+##### 6.4.1 IUPred2A 
 * Web-server: 1) Go to the webserver 2) Upload the amino acoid file (_AA) created with extractSequence() function. 3) Add your email (you will recieve a notification when the job is done). 4) In the email use the link indicated by “The text file can be found here:” and save the result (right click on a blank space and use “save as” or use the keybord shortcut “ctrl/cmd + s”). 5) Supply a string indicating the path to the downloaded file to the “pathToIUPred2AresultFile” argument. If multiple files are creted (multiple web-server runs) just supply the path to all of them as a string.
 * Download command-line version from: https://iupred2a.elte.hu/download_new
 * Manual: https://iupred2a.elte.hu/help_new
@@ -126,42 +126,42 @@ echo -e "\n\n################" >>iupred2a_output.txt
 done
 ```
 
-##### 4.2 NetSurfP-2 
+##### 6.4.2 NetSurfP-2 
 * Web-server: 1) Go to webserver. 2) Upload the amino acid file (_AA) created with extractSequence() function. 3) Submit your job. 4) Wait till job is finished (if you submit your email you will receive a notification). 5) In the top-right corner of the result site use the “Export All” button to download the results as a CNV file. 6) Supply a string indicating the path to the downloaded csv file directly to the “pathToNetSurfP2resultFile” argument. If you run NetSurfP-2 locally just use the “–csv” argument and provide the resulting csv file to the pathToNetSurfP2resultFile argument.
 
 
 
-### Add CPAT analysis
+### 7. Add sequence analysis results into IsoformSwitchAnalyzeR
+    # Add CPAT analysis
     asl_data = analyzeCPAT(
-    switchAnalyzeRlist   = asl_extracted,
-    pathToCPATresultFile = "./asl_CPAT.txt",
+    switchAnalyzeRlist   = asl_analyzed,
+    pathToCPATresultFile = "./cpat_output.txt",
     codingCutoff         = 0.725, # the coding potential cutoff we suggested for human
     removeNoncodinORFs   = TRUE   # because ORF was predicted de novo
     )
 
-### Add PFAM analysis
+    # Add PFAM analysis
     asl_data = analyzePFAM(
     switchAnalyzeRlist   = asl_data,
-    pathToPFAMresultFile = "./",
+    pathToPFAMresultFile = "./pfam_output.txt",
     showProgress=FALSE
     )
 
-### Add SignalP analysis
+    # Add SignalP analysis
     asl_data = analyzeSignalP(
     switchAnalyzeRlist       = asl_data,
-    pathToSignalPresultFile  = "./asl_SignalP.txt"
+    pathToSignalPresultFile  = "./signalp_output_summary.signalp5"
     )
-#> Added signal peptide information to 17 (10.49%) transcripts
 
-### Add IUPred2A analysis
+    # Add IUPred2A analysis
     asl_data = analyzeIUPred2A(
     switchAnalyzeRlist        = asl_data,
-    pathToIUPred2AresultFile = "./asl_IUPred2A.result",
+    pathToIUPred2AresultFile = "./iupred2a_output.txt",
     showProgress = FALSE
     )
 
 
-### Predicting Alternative Splicing
+### 8. Predicting Alternative Splicing
     asl_data_altspl = analyzeAlternativeSplicing(
     switchAnalyzeRlist = asl_data,
     quiet=TRUE
