@@ -105,7 +105,15 @@ signalp -fasta isoform_aminoacid.fasta -org euk -format short -prefix signalp_ou
 * Manual: https://iupred2a.elte.hu/help_new
 ```
 # Input is the AA sequence of one transcript only
-python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a ENSMUST00000092794_aminoacid.fasta long >iupred_output_ENSMUST00000092794.txt
+cd isoformSwitchAnalyzeR_isoform_AA_split
+count=0
+Nproc=20
+for f in *.fa
+do
+python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a/ ${f} long >iupred_output_${f}.txt &
+let count+=1
+[[ $((count%Nproc)) -eq 0 ]] && wait
+done
 ```
 
 ##### 4.2 NetSurfP-2 
