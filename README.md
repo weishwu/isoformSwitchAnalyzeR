@@ -71,10 +71,8 @@ The first column is the sample ID and the rest is the conditions.
 * Download pre-built hexamer files from: https://sourceforge.net/projects/rna-cpat/files/v1.2.2/prebuilt_model/
 ```
 source activate cpat
-
 # mouse
 cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Mouse_logitModel.RData -x /usr/share/cpat_data/Mouse_Hexamer.tsv -o cpat_output.txt
-
 # human
 cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Human_logitModel.RData -x /usr/share/cpat_data/Human_Hexamer.tsv -o cpat_output.txt
 ```
@@ -89,6 +87,7 @@ cpat.py -g isoform_nucleotide.fasta -d /usr/share/cpat_data/Human_logitModel.RDa
 * The web-server linked from the IsoformSwitchAnalyzeR manual is actuall hmmscan, whereas the manual states that "pfam ... can be run either locally (using the pfam_scan.pl script as described in the readme found here or via their [webserver](http://lilab.research.bcm.edu/cpat/)". The difference is explained here: https://gist.github.com/olgabot/f65365842e27d2487ad3. The actual pfamscan web-server should be: https://www.ebi.ac.uk/Tools/pfa/pfamscan/
 * The results are a little different between command-line version and the web-server. The lines are slightly fewer from the command-line version and the E-values are slightly differet. The web-server uses `-e_seq 10 -e_dom 10` by default but they are not the default parameters in the command-line version (values not shown).
 ```
+source activate pfam
 pfam_scan.pl -fasta isoform_aminoacid.fasta -dir /usr/share/pfam_data -outfile pfam_output.txt
 ```
 
