@@ -104,7 +104,9 @@ signalp -fasta isoform_aminoacid.fasta -org euk -format short -prefix signalp_ou
 * Download command-line version from: https://iupred2a.elte.hu/download_new
 * Manual: https://iupred2a.elte.hu/help_new
 ```
-# Input is the AA sequence of one transcript only
+# iupred2a.py takes only one fasta sequence, so the isoform fasta file has to be split to individual isoform files first:
+python split_AA_fasta.py
+
 cd isoformSwitchAnalyzeR_isoform_AA_split
 count=0
 Nproc=20
