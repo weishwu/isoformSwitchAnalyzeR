@@ -45,7 +45,7 @@ The first column is the sample ID and the rest is the conditions.
     asl_analyzed=isoformSwitchAnalysisPart1(aSwitchList)
     save(asl_analyzed,file='asl_analyzed.rda')
     
-    # select significant DTU isoforms
+    # Although the manual says "alpha = 0.05" and "dIFcutoff = 0.1" are among the default filters in isoformSwitchAnalysisPart1(), the output contains the full ranges of both parameters. Use extractTopSwitches() to select the DTU:
     asl_analyzed_selected=extractTopSwitches(
          asl_analyzed,
          filterForConsequences=FALSE,
