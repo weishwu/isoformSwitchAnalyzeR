@@ -112,16 +112,17 @@ count=0
 Nproc=20
 for f in *.fa
 do
-python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a/ ${f} long >iupred_output_${f}.txt &
+python /usr/share/iupred2a/iupred2a.py -a -d /usr/share/iupred2a/ ${f} long >iupred2a_output_${f}.txt &
 let count+=1
 [[ $((count%Nproc)) -eq 0 ]] && wait
 done
 
-# combine results into one file
-for f in *.txt
+# combine results into one file, add isoform ID
+for f in iupred2a_output_*.fa.txt
 do
-cat ${f} >>ipured2a_output.txt
-echo -e "\n\n################" >>ipured2a_output.txt
+id=`echo ${f}|cut -d'_' -f3|sed 's/.fa.txt//g'`
+sed "s/# POS\t/>${id}\n# POS\t/g" ${f} >>iupred2a_output.txt
+echo -e "\n\n################" >>iupred2a_output.txt
 done
 ```
 
