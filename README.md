@@ -44,6 +44,8 @@ The first column is the sample ID and the rest is the conditions.
     
     asl_analyzed=isoformSwitchAnalysisPart1(aSwitchList)
     save(asl_analyzed,file='asl_analyzed.rda')
+    
+    # select significant DTU isoforms
     asl_analyzed_selected=extractTopSwitches(
          asl_analyzed,
          filterForConsequences=FALSE,
