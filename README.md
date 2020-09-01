@@ -44,6 +44,18 @@ The first column is the sample ID and the rest is the conditions.
     
     asl_analyzed=isoformSwitchAnalysisPart1(aSwitchList)
     save(asl_analyzed,file='asl_analyzed.rda')
+    asl_analyzed_selected=extractTopSwitches(
+         asl_analyzed,
+         filterForConsequences=FALSE,
+         extractGenes=FALSE,
+         alpha=0.05,
+         dIFcutoff = 0.1,
+         n=Inf,
+         inEachComparison=FALSE,
+         sortByQvals=TRUE
+     )
+     write.table(asl_analyzed_selected, 'isoforms_DTU.txt', quote=F,sep='\t',row.names=F,col.names=T)
+
 
 ### Sequence analysis
 * Docker image containing cpat, pfam, signalp and iupred2a: 
