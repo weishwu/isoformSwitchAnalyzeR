@@ -167,11 +167,7 @@ done
 ### 9. Analyze consequences
     asl_data_analyzed = analyzeSwitchConsequences( asl_data_altspl )
 
-### overview of number of intron retentions (IR)
-    table( asl_data_altspl$AlternativeSplicingAnalysis$IR )
-
-
-### plot
+### 10. plot
     # Switch plot
     pdf(file='switchplot.pdf',width=20,height=15)
     switchPlot(
