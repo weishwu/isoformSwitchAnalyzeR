@@ -167,7 +167,7 @@ done
 ### 9. Analyze consequences
     asl_data_analyzed = analyzeSwitchConsequences( asl_data_altspl )
 
-### 10. plot
+### 10. plots
     # Switch plot
     pdf(file='switchplot.pdf',width=20,height=15)
     switchPlot(
